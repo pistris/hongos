@@ -78,11 +78,7 @@ $resultados = $query->num_rows;
             </nav>
         </div>
     </header>
-  <!-- END HEADER -->
-
-  <!-- //////////////////////////////////////////////////////////////////////////// -->
-
-  <!-- START MAIN -->
+ 
   <div id="main">
     <!-- START WRAPPER -->
     <div class="wrapper">
