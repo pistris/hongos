@@ -1,5 +1,6 @@
 <?php
-    @session_start();
+  
+   @session_start();
     require('php/conexion.php');
     
     if(!isset($_SESSION["id_usuario"])){
@@ -11,57 +12,43 @@
     $result=$mysqli->query($sql);
     $row = $result->fetch_assoc();
 
-     $query="SELECT * FROM insumo";
-  
-   $resultado=$mysqli->query($query);
-
-   $mysqli = new mysqli("localhost","root", "", "hongo");
-$query = $mysqli->prepare("SELECT * FROM hongos WHERE ID='$idUsuario'");
-$query->execute();
-$query->store_result();
-
-$resultados = $query->num_rows;
+     
+    
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="msapplication-tap-highlight" content="no">
- <meta name="description" content="Es una pagina dedicada a la micologia">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
     <meta name="keywords" content="oaxaca,hongos,itvo">
     <title>Hongos|Bienvenido <?php echo ($row['nombre']); ?> </title>
 
-
-   <link rel="icon" href="images/favicon/mushroom.png" sizes="32x32">
+    <link rel="icon" href="images/favicon/mushroom.png" sizes="32x32">
     <link rel="apple-touch-icon-precomposed" href="images/favicon/mushroom.png">
     <meta name="msapplication-TileColor" content="#00bcd4">
     <meta name="msapplication-TileImage" content="images/favicon/mushroom.png">
-  <!-- For Windows Phone -->
 
 
-  <!-- CORE CSS-->
-  
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-  
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
 
 
-  <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-  <link href="css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+ 
+
 </head>
 
-<body>
-
-  <header id="header" class="page-topbar">
+<body >
+  
+    <header id="header" class="page-topbar">
         <div class="navbar-fixed">
             <nav class="cyan">
                 <div class="nav-wrapper">
@@ -78,13 +65,12 @@ $resultados = $query->num_rows;
             </nav>
         </div>
     </header>
- 
-  <div id="main">
-    <!-- START WRAPPER -->
-    <div class="wrapper">
 
-       <!-- START LEFT SIDEBAR NAV-->
-                <aside id="left-sidebar-nav">
+
+    <div id="main">
+        <div class="wrapper">
+
+             <aside id="left-sidebar-nav">
                 <ul id="slide-out" class="side-nav fixed leftside-navigation">
                     <li class="user-details cyan darken-2">
                         <div class="row">
@@ -176,143 +162,326 @@ $resultados = $query->num_rows;
 
       <!-- START CONTENT -->
       <section id="content">
-        
-        <!--breadcrumbs start-->
-        <!-- <div id="breadcrumbs-wrapper" class=" grey lighten-3">
-          <div class="container">
-            <div class="row">
-              <div class="col s12 m12 l12">
-                <h5 class="breadcrumbs-title">Basic Tables</h5>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="#">Tables</a></li>
-                    <li class="active">Basic Tables</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!--breadcrumbs end-->
-        
+
+       
 
         <!--start container-->
         <div class="container">
           <div class="section">
 
-            <p class="caption">En este panel podra ver los usuarios registrados en la pagina y que pueden ayudar a amplicarla con sus aportaciones</p>
+        
+
             <div class="divider"></div>
-            
-            <!--DataTables example-->
-            <div id="table-datatables">
-              <h4 class="header">Aportadores</h4>
-              <!-- este es la session -->
-    <?php if($_SESSION['tipo_usuario']==1) { ?>
-    
-    <a href="registro_insumo.php">Registarse</a>
-    <br />
-    <?php } ?>
-    <!-- termina session -->
+           <!--  
+            <div id="basic-form" class="section">
               <div class="row">
-             <!--    <div class="col s12 m4 l3">
-                  <p>DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function.</p>
-
-                  <p>Searching, ordering, paging etc goodness will be immediately added to the table, as shown in this example.</p>
-                </div> -->
-                <div class="col s12 m8 l12">
-                  <table id="data-table-simple" class="display" cellspacing="0">
-                    <thead>
-                        <tr>
-
-                            <th>Identificador</th>
-                            <th>Nombre de insumo</th>
-                            <th>descripcion</th>
-                            <th>medida</th>
-                            <th>color</th>
-                            <th>unidad de usuario</th>
-                            <th></th>
-                            <th></th>
-                               <th>Estatus</th>
-                          
-                        </tr>
-                    </thead>
-                      
-                    <tbody><?php while($row=$resultado->fetch_assoc()){ ?>
-
-                    <tr>
-                       <td> 
-            <p><a class="waves-effect waves-light " > <?php echo $row['id_insumo'];?></a>
-       </p>
-                       </td>
-                       <td>
-                         <?php echo $row['nombre'];?>
-                       </td>
-                       <td>
-                         <?php echo $row['descripcion'];?>
-                       </td>
-                       <td>
-                         <?php echo $row['medida'];?>
-                       </td>
-                       <td>
-                         <?php echo $row['color'];?>
-                       </td>
-                       <td>
-                         <?php echo $row['unidad'];?>
-                       </td>
-                            
-
-                       <td>
-                         <a href="modificar_insumo.php?id=<?php echo $row['id_insumo'];?>">Modificar</a>
-                       </td>
-                       
-        <!-- este es la session -->
-                          
-                         <td>
-                            <a href="php/eliminarinsumo.php?id=<?php echo $row['id_insumo'];?>">Eliminar</a>
-                         </td>
-
-         <!-- termina session -->
-           <td>
-                                      
-                                        <?php if($row['status']=="A") {?>
-                                            <a href="insumo-switch.php?id=<?php echo $row['id_insumo'];?>" target="_self">
-                                                <button type="button" class="btn btn-large waves-effect waves-light light-green darken-4">
-                                                Activo
-                                                </button> 
-                                            </a>
-                                        <?php } else if($row['status'] == "I"){?>
-                                            <a href="insumo-switch.php?id=<?php echo $row['id_insumo'];?>" target="_self">
-                                            <button type="button" class="btn btn-large waves-effect waves-light red darken-4">
-                                                Inactivo
-                                            </button> 
-                                            </a>
-                                        <?php } ?>
-                                        </td>
-
-             
-                    </tr>
-                      
-                        <?php } ?>
-                    </tbody>
-                  </table>
+                <div class="col s12 m12 l6">
+                  <div class="card-panel">
+                    <h4 class="header2">Basic Form</h4>
+                    <div class="row">
+                      <form class="col s12">
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input id="name" type="text">
+                            <label for="first_name">Name</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input id="email" type="email">
+                            <label for="email">Email</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input id="password" type="password">
+                            <label for="password">Password</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <textarea id="message" class="materialize-textarea"></textarea>
+                            <label for="message">Message</label>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                                <i class="mdi-content-send right"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="col s12 m12 l6">
+                  <div class="card-panel">
+                    <h4 class="header2">Form with placeholder</h4>
+                    <div class="row">
+                      <form class="col s12">
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input placeholder="John Doe" id="name2" type="text">
+                            <label for="first_name">Name</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input placeholder="john@domainname.com" id="email2" type="email">
+                            <label for="email">Email</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <input placeholder="YourPassword" id="password2" type="password">
+                            <label for="password">Password</label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <textarea placeholder="Oh WoW! Let me check this one too." id="message2" class="materialize-textarea"></textarea>
+                            <label for="message">Message</label>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                                <i class="mdi-content-send right"></i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div> 
-            <br>
-            <div class="divider"></div> 
-           
+            </div>
 
            
+            <div class="row">
+              <div class="col s12 m12 l6">
+                <div class="card-panel">
+                  <h4 class="header2">Form with icon prefixes</h4>
+                  <div class="row">
+                    <form class="col s12">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-action-account-circle prefix"></i>
+                          <input id="name3" type="text">
+                          <label for="first_name">Name</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-communication-email prefix"></i>
+                          <input id="email3" type="email">
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-action-lock-outline prefix"></i>
+                          <input id="password3" type="password">
+                          <label for="password">Password</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-action-question-answer prefix"></i>
+                          <textarea id="message3" class="materialize-textarea"></textarea>
+                          <label for="message">Message</label>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                              <i class="mdi-content-send right"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+       
+              <div class="col s12 m12 l6">
+                <div class="card-panel">
+                  <h4 class="header2">Form with validation</h4>
+                  <div class="row">
+                    <form class="col s12">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-action-account-circle prefix"></i>
+                          <input id="name4" type="text" class="validate">
+                          <label for="first_name">Name</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-communication-email prefix"></i>
+                          <input id="email4" type="email" class="validate">
+                          <label for="email">Email</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-action-lock-outline prefix"></i>
+                          <input id="password5" type="password" class="validate">
+                          <label for="password">Password</label>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <i class="mdi-action-question-answer prefix"></i>
+                          <textarea id="message4" class="materialize-textarea validate" length="120"></textarea>
+                          <label for="message">Message</label>
+                        </div>
+                        <div class="row">
+                          <div class="input-field col s12">
+                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Submit
+                              <i class="mdi-content-send right"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-        </div>
-        <!--end container-->
 
-      </section>
-      <!-- END CONTENT -->
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="card-panel">
+                <div class="row">
+                <form class="col s12">
+                  <h4 class="header2">Inline form</h4>
+                  <div class="row">
+                    <div class="input-field col s4">
+                      <i class="mdi-action-account-circle prefix"></i>
+                      <input id="icon_prefix" type="text" class="validate">
+                      <label for="icon_prefix">First Name</label>
+                    </div>
+                    <div class="input-field col s4">
+                      <i class="mdi-action-lock-outline prefix"></i>
+                      <input id="icon_password" type="password" class="validate">
+                      <label for="icon_password">Password</label>
+                    </div>
+                    <div class="input-field col s4">
+                      <div class="input-field col s12">
+                        <button class="btn cyan waves-effect waves-light" type="submit" name="action"><i class="mdi-action-lock-open"></i> Login</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="card-panel">
+                <div class="row">
+                <form class="col s12">
+                  <h4 class="header2">Inline form with placeholder</h4>
+                  <div class="row">
+                    <div class="input-field col s4">
+                      <i class="mdi-action-account-circle prefix"></i>
+                      <input placeholder="John Doe" id="icon_prefix2" type="text" class="validate">
+                      <label for="icon_prefix">First Name</label>
+                    </div>
+                    <div class="input-field col s4">
+                      <i class="mdi-communication-email prefix"></i>
+                      <input placeholder="john@mydomain.com" id="icon_email" type="email" class="validate">
+                      <label for="icon_email">Email</label>
+                    </div>
+                    <div class="input-field col s4">
+                      <div class="input-field col s12">
+                        <button class="btn cyan waves-effect waves-light" type="submit" name="action"><i class="mdi-action-perm-identity"></i> Register</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+          </div> -->
 
-      <!-- //////////////////////////////////////////////////////////////////////////// -->
-      <!-- START RIGHT SIDEBAR NAV-->
-      <aside id="right-sidebar-nav">
+          <!--Form Advance-->          
+          <div class="row">
+            <div class="col s12 m12 l12">
+              <div class="card-panel">
+                <h4 class="header2">Modificar informacion personal</h4>
+                <div class="row">
+                <form class="col s12" method="POST" action="subiendo_insumo.php" >
+                   
+                <div class="row">
+                      <div class="input-field col s6">
+                        <input id="nombre" type="text" name="nombre">
+                        <label for="first_name">Nombre</label>
+                      </div>
+                      <div class="input-field col s6">
+                        <input id="descripcion" type="text" name="descripcion" >
+                        <label for="first_name">descripcion</label>
+                      </div>
+                    
+                      <div class="input-field col s6">
+                        <input id="medida" type="text" name="medida" >
+                        <label for="last_name">medida</label>
+                      </div>
+                    
+                    <div class="input-field col s6">
+                        <input id="color" type="text" name="color" >
+                        <label for="last_name">color</label>
+                      </div>
+                    
+                    <div class="input-field col s6">
+                        <input id="unidad" type="text" name="unidad" >
+                        <label for="last_name">unidad</label>
+                      </div>
+                   
+                    <div class="input-field col s6">
+                        <input id="familia" type="text" name="familia" >
+                        <label for="last_name">familia</label>
+                      </div>
+                 
+                   
+                  
+                    
+                    <div class="input-field col s6">
+                        <input id="observaciones" type="text" name="observaciones" >
+                        <label for="last_name">observaciones</label>
+                    
+                  
+                    </div>
+                    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">                    
+                <div class="row">
+                      <div class="row">
+                        <div class="input-field col s12">
+                          <button class="btn cyan waves-effect waves-light right" >Submit
+                            <i class="mdi-content-send right"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                    
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </section>
+  <!-- END CONTENT -->
+
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+  <!-- START RIGHT SIDEBAR NAV-->
+  <aside id="right-sidebar-nav">
         <ul id="chat-out" class="side-nav rightside-navigation">
             <li class="li-hover">
             <a href="#" data-activates="chat-out" class="chat-close-collapse right"><i class="mdi-navigation-close"></i></a>
@@ -320,7 +489,7 @@ $resultados = $query->num_rows;
                 <form class="col s12">
                     <div class="input-field">
                         <i class="mdi-action-search prefix"></i>
-                        <input id="icon_prefix" type="text" class="validate">
+                        <input id="icon_prefix3" type="text" class="validate">
                         <label for="icon_prefix">Search</label>
                     </div>
                 </form>
@@ -447,10 +616,10 @@ $resultados = $query->num_rows;
             </li>
         </ul>
       </aside>
-      <!-- LEFT RIGHT SIDEBAR NAV-->
+  <!-- LEFT RIGHT SIDEBAR NAV-->
 
-    </div>
-    <!-- END WRAPPER -->
+  </div>
+  <!-- END WRAPPER -->
 
   </div>
   <!-- END MAIN -->
@@ -460,15 +629,20 @@ $resultados = $query->num_rows;
   <!-- //////////////////////////////////////////////////////////////////////////// -->
 
   <!-- START FOOTER -->
-  <footer class="page-footer">
-    <div class="footer-copyright">
-      <div class="container">
-                Copyright © 2016 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">Instituto Tecnologico del Valle de Oaxaca</a> Departamento.
-                <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a></span>
+  <footer class="page-footer cyan lighten-1">
+        <div class="container">
+            <div class="row">
+              
             </div>
-    </div>
-  </footer>
-    <!-- END FOOTER -->
+        </div>
+        <div class="footer-copyright cyan lighten-2">
+            <div class="container cyan lighten-2">
+                Copyright © 2017 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">Instituto Tecnologico del Valle de Oaxaca</a> 
+                <span class="right">  <a class="grey-text text-lighten-4" href="http://geekslabs.com/">Acnologia</a></span>
+            </div>
+        </div>
+    </footer>
+  <!-- END FOOTER -->
 
 
 
@@ -484,14 +658,12 @@ $resultados = $query->num_rows;
     <script type="text/javascript" src="js/prism.js"></script>
     <!--scrollbar-->
     <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <!-- data-tables -->
-    <script type="text/javascript" src="js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/plugins/data-tables/data-tables-script.js"></script>
     <!-- chartist -->
     <script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>   
     
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="js/plugins.js"></script>    
+    <script type="text/javascript" src="js/plugins.js"></script>
+    
 </body>
 
 </html>

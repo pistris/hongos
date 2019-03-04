@@ -15,50 +15,27 @@ require('php/conexion.php');
 
 	
 	  
-            if (isset($_POST['cbx_municipio'])) {
-$cbx_municipio = $_POST['cbx_municipio'];
-} else {
-$cbx_municipio = "";
-}  
-              if (isset($_POST['cbx_localidad'])) {
-$cbx_localidad = $_POST['cbx_localidad'];
-} else {
-$cbx_localidad = "";
-}
+           
 
-            $lugar =$_POST['lugar'];
-            $vista =$_POST['vista'];        
-            $libro =$_POST['libro'];        
-            $micro =$_POST['micro'];        
-            $quimica =$_POST['quimica'];        
-            $herbario =$_POST['herbario'];      
-            $id_herbario =$_POST['id_herbario'];        
-    	    $Reino =$_POST['Reino'];	
-    	    $Phyllum =$_POST['Phyllum'];
-    	    $Clase =$_POST['Clase'];
-    	    $Orden =$_POST['Orden'];
-    	    $Familia =$_POST['Familia'];
-        	$Genero =$_POST['Genero'];
-        	$Especie =$_POST['Especie'];
-            $ejemplar =$_POST['ejemplar'];  
+            $nombre =$_POST['nombre'];
+            $descripcion =$_POST['descripcion'];
+            $medida =$_POST['medida'];
+            $color =$_POST['color'];
+            $unidad =$_POST['unidad'];
+            $familia =$_POST['familia'];
+            $observaciones =$_POST['observaciones'];
+       
             $id=$_POST['id'];
       
 			
 
 
-			  $query = "INSERT INTO hongos (Reino,Phyllum,Clase,Orden,Familia,Genero,Especie,ejemplar,id) VALUES('$Reino','$Phyllum','$Clase','$Orden','$Familia','$Genero','$Especie','$ejemplar','$id')";
+			  $query = "INSERT INTO insumo (nombre,descripcion,medida,color,unidad,familia,observaciones,id) VALUES('$nombre','$descripcion','$medida','$color','$unidad','$familia','$observaciones','$id')";
     $resultado=$mysqli->query($query);
-      $idhongo = $mysqli->insert_id;
+      $id_insumo = $mysqli->insert_id;
+     
    
 
-              $quer = "INSERT INTO datos_geograficos (Id_hongo,Municipio,Localidad) VALUES($idhongo,'$cbx_municipio','$cbx_localidad')";
-              $resul=$mysqli->query($quer);
-                  $querys = "INSERT INTO dat_eco (Id_hongo,Tip_vegetacion,Hospedero) VALUES($idhongo,'$vista','$micro')";
-                   $result=$mysqli->query($querys);
-                     $queryss = "INSERT INTO citado (Id_hongo,Descripcion) VALUES($idhongo,'$libro')";
-                          $resultados=$mysqli->query($queryss);
-   $querysss = "INSERT INTO herbario (clave_regis,Emplear_tipo,id_hongo,id_persona) VALUES('$id_herbario','$herbario',$idhongo,'$id')";
-                         $resultad=$mysqli->query($querysss);
  
 
 	
@@ -286,16 +263,9 @@ echo $resultados;
    
 
  <table align="center">
-                <tr>
-                    <td>Archivo</td>
-                    <td><input type="file"  multiple="multiple" id="archivos"></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td><button id="enviar">Enviar Imagenes</button></td>
-                    <td><a class="waves-effect waves-light btn" href="hongos.php">subir en otro momento</a></td>
-                </tr>    
-            </table>
+               
+                 
+                 
                    
             <div class="mensage"> Archivos Subidos Correctamente </div>  
 

@@ -1,7 +1,7 @@
-<?php
-    @session_start();
-    require('php/conexion.php');
-    
+<?php 
+ @session_start();
+
+	require('php/conexion.php');
     if(!isset($_SESSION["id_usuario"])){
         header("Location: index.php");
     }
@@ -10,58 +10,59 @@
     
     $result=$mysqli->query($sql);
     $row = $result->fetch_assoc();
+	
+	
+	 $id=$_POST['id'];
+  $nombre=$_POST['nombre'];
+  $descripcion=$_POST['descripcion'];
+  $medida=$_POST['medida'];
+  $color=$_POST['color'];
+  $familia=$_POST['familia'];
+  $observaciones=$_POST['observaciones'];
 
-     $query="SELECT * FROM insumo";
-  
-   $resultado=$mysqli->query($query);
-
-   $mysqli = new mysqli("localhost","root", "", "hongo");
-$query = $mysqli->prepare("SELECT * FROM hongos WHERE ID='$idUsuario'");
-$query->execute();
-$query->store_result();
-
-$resultados = $query->num_rows;
-
+	
+	$query="UPDATE insumo SET nombre='$nombre', descripcion='$descripcion', medida='$medida', color='$color', familia='$familia', observaciones='$observaciones' WHERE id_insumo='$id'";
+    $resultado=$mysqli->query($query);
+	
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
+       
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="msapplication-tap-highlight" content="no">
- <meta name="description" content="Es una pagina dedicada a la micologia">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
     <meta name="keywords" content="oaxaca,hongos,itvo">
     <title>Hongos|Bienvenido <?php echo ($row['nombre']); ?> </title>
 
-
-   <link rel="icon" href="images/favicon/mushroom.png" sizes="32x32">
+    <link rel="icon" href="images/favicon/mushroom.png" sizes="32x32">
     <link rel="apple-touch-icon-precomposed" href="images/favicon/mushroom.png">
     <meta name="msapplication-TileColor" content="#00bcd4">
     <meta name="msapplication-TileImage" content="images/favicon/mushroom.png">
-  <!-- For Windows Phone -->
 
 
-  <!-- CORE CSS-->
-  
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="http://cdn.datatables.net/1.10.6/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-  
+    <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
 
 
-  <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-  <link href="css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="js/plugins/jvectormap/jquery-jvectormap.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+ 
+
 </head>
 
-<body>
-
-  <header id="header" class="page-topbar">
+<body >
+    <div id="loader-wrapper">
+        <div id="loader"></div>        
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <header id="header" class="page-topbar">
         <div class="navbar-fixed">
             <nav class="cyan">
                 <div class="nav-wrapper">
@@ -78,13 +79,12 @@ $resultados = $query->num_rows;
             </nav>
         </div>
     </header>
- 
-  <div id="main">
-    <!-- START WRAPPER -->
-    <div class="wrapper">
 
-       <!-- START LEFT SIDEBAR NAV-->
-                <aside id="left-sidebar-nav">
+
+    <div id="main">
+        <div class="wrapper">
+
+            <aside id="left-sidebar-nav">
                 <ul id="slide-out" class="side-nav fixed leftside-navigation">
                     <li class="user-details cyan darken-2">
                         <div class="row">
@@ -176,137 +176,38 @@ $resultados = $query->num_rows;
 
       <!-- START CONTENT -->
       <section id="content">
-        
-        <!--breadcrumbs start-->
-        <!-- <div id="breadcrumbs-wrapper" class=" grey lighten-3">
-          <div class="container">
-            <div class="row">
-              <div class="col s12 m12 l12">
-                <h5 class="breadcrumbs-title">Basic Tables</h5>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Dashboard</a></li>
-                    <li><a href="#">Tables</a></li>
-                    <li class="active">Basic Tables</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!--breadcrumbs end-->
+  
         
 
         <!--start container-->
         <div class="container">
           <div class="section">
-
-            <p class="caption">En este panel podra ver los usuarios registrados en la pagina y que pueden ayudar a amplicarla con sus aportaciones</p>
-            <div class="divider"></div>
-            
-            <!--DataTables example-->
-            <div id="table-datatables">
-              <h4 class="header">Aportadores</h4>
-              <!-- este es la session -->
-    <?php if($_SESSION['tipo_usuario']==1) { ?>
+ <a href="dash.php">Regresar a inicio</a>
+           
+             <?php 
+        if($resultado>0){
+        ?>
+        
+        <h1>usuario Modificado</h1>
+        
+          <?php   }else{ ?>
+        
+        <h1><?php echo $errors; ?></h1>
+        
+      <?php } ?>
+      
+      <p></p> 
     
-    <a href="registro_insumo.php">Registarse</a>
-    <br />
-    <?php } ?>
-    <!-- termina session -->
-              <div class="row">
-             <!--    <div class="col s12 m4 l3">
-                  <p>DataTables has most features enabled by default, so all you need to do to use it with your own tables is to call the construction function.</p>
+     
+      
+    
+      
 
-                  <p>Searching, ordering, paging etc goodness will be immediately added to the table, as shown in this example.</p>
-                </div> -->
-                <div class="col s12 m8 l12">
-                  <table id="data-table-simple" class="display" cellspacing="0">
-                    <thead>
-                        <tr>
-
-                            <th>Identificador</th>
-                            <th>Nombre de insumo</th>
-                            <th>descripcion</th>
-                            <th>medida</th>
-                            <th>color</th>
-                            <th>unidad de usuario</th>
-                            <th></th>
-                            <th></th>
-                               <th>Estatus</th>
-                          
-                        </tr>
-                    </thead>
-                      
-                    <tbody><?php while($row=$resultado->fetch_assoc()){ ?>
-
-                    <tr>
-                       <td> 
-            <p><a class="waves-effect waves-light " > <?php echo $row['id_insumo'];?></a>
-       </p>
-                       </td>
-                       <td>
-                         <?php echo $row['nombre'];?>
-                       </td>
-                       <td>
-                         <?php echo $row['descripcion'];?>
-                       </td>
-                       <td>
-                         <?php echo $row['medida'];?>
-                       </td>
-                       <td>
-                         <?php echo $row['color'];?>
-                       </td>
-                       <td>
-                         <?php echo $row['unidad'];?>
-                       </td>
-                            
-
-                       <td>
-                         <a href="modificar_insumo.php?id=<?php echo $row['id_insumo'];?>">Modificar</a>
-                       </td>
-                       
-        <!-- este es la session -->
-                          
-                         <td>
-                            <a href="php/eliminarinsumo.php?id=<?php echo $row['id_insumo'];?>">Eliminar</a>
-                         </td>
-
-         <!-- termina session -->
-           <td>
-                                      
-                                        <?php if($row['status']=="A") {?>
-                                            <a href="insumo-switch.php?id=<?php echo $row['id_insumo'];?>" target="_self">
-                                                <button type="button" class="btn btn-large waves-effect waves-light light-green darken-4">
-                                                Activo
-                                                </button> 
-                                            </a>
-                                        <?php } else if($row['status'] == "I"){?>
-                                            <a href="insumo-switch.php?id=<?php echo $row['id_insumo'];?>" target="_self">
-                                            <button type="button" class="btn btn-large waves-effect waves-light red darken-4">
-                                                Inactivo
-                                            </button> 
-                                            </a>
-                                        <?php } ?>
-                                        </td>
-
-             
-                    </tr>
-                      
-                        <?php } ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div> 
-            <br>
-            <div class="divider"></div> 
-           
-
-           
+            <div class="divider"></div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
           </div>
-
         </div>
         <!--end container-->
-
       </section>
       <!-- END CONTENT -->
 
@@ -460,15 +361,20 @@ $resultados = $query->num_rows;
   <!-- //////////////////////////////////////////////////////////////////////////// -->
 
   <!-- START FOOTER -->
-  <footer class="page-footer">
-    <div class="footer-copyright">
-      <div class="container">
-                Copyright © 2016 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">Instituto Tecnologico del Valle de Oaxaca</a> Departamento.
-                <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a></span>
+  <footer class="page-footer cyan lighten-1">
+        <div class="container">
+            <div class="row">
+              
             </div>
-    </div>
-  </footer>
-    <!-- END FOOTER -->
+        </div>
+        <div class="footer-copyright cyan lighten-2">
+            <div class="container cyan lighten-2">
+                Copyright © 2017 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">Instituto Tecnologico del Valle de Oaxaca</a> 
+                <span class="right">  <a class="grey-text text-lighten-4" href="http://geekslabs.com/">Acnologia</a></span>
+            </div>
+        </div>
+    </footer>
+  <!-- END FOOTER -->
 
 
 
@@ -484,14 +390,12 @@ $resultados = $query->num_rows;
     <script type="text/javascript" src="js/prism.js"></script>
     <!--scrollbar-->
     <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <!-- data-tables -->
-    <script type="text/javascript" src="js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="js/plugins/data-tables/data-tables-script.js"></script>
     <!-- chartist -->
     <script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>   
     
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-    <script type="text/javascript" src="js/plugins.js"></script>    
+    <script type="text/javascript" src="js/plugins.js"></script>
+    
 </body>
 
 </html>
