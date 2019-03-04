@@ -11,7 +11,7 @@
     $result=$mysqli->query($sql);
     $row = $result->fetch_assoc();
 
-     $query="SELECT u.id,u.usuario,u.id_tipo,u.status, p.nombre, p.apellidos,p.correo,p.institucion,p.fecha FROM usuarios AS u INNER JOIN personal AS p ON u.id_personal=p.id ";
+     $query="SELECT * FROM insumo, insumo_proveedor, proveedor";
   
    $resultado=$mysqli->query($query);
 
@@ -224,7 +224,10 @@ $resultados = $query->num_rows;
                         <tr>
 
                             <th>Identificador</th>
-                            <th>Nombre de usuario</th>
+                            <th>Nombre de insumo</th>
+                            <th>medida</th>
+                            <th>color</th>
+                            <th>unidad de usuario</th>
                             <th></th>
                             <th></th>
                                <th>Estatus</th>
@@ -233,68 +236,30 @@ $resultados = $query->num_rows;
                     </thead>
                       
                     <tbody><?php while($row=$resultado->fetch_assoc()){ ?>
-<div id="modal<?php echo $row['id'];?>" class="modal">
-                        <div class="col s12 m12 l12">
-                 
-                  <div id="profile-card" class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                      <img class="activator" src="images/user-bg.jpg" alt="user bg">
-                    </div>
-                    <div class="card-content">
-                      <img src="imgperfil/<?php echo $row['id'].'.jpg'?>" alt="" class="circle responsive-img activator card-profile-image">
-                      <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
-                        <i class="mdi-editor-mode-edit"></i>
-                      </a>
 
-                      <span class="card-title activator grey-text text-darken-4"><?php echo $row['nombre']?> <?php echo $row['apellidos']?></span>
-                      <p><i class="mdi-action-perm-identity"></i> <?php if($_SESSION['tipo_usuario']==1) { ?>
-                                    Administrador
-                                 <?php } else{echo "Usuario";}?></p>
-                      <p><i class="mdi-communication-email"></i> <?php echo $row['correo']?></p>
-
-                    </div>
-                    <div class="card-reveal">
-                      <span class="card-title grey-text text-darken-4"><?php echo $row['nombre']?> <?php echo $row['apellidos']?> <i class="mdi-navigation-close right"></i></span>
-                      <p>Here is some more information about this card.</p>
-                      <p><i class="mdi-action-perm-identity"></i> <?php if($_SESSION['tipo_usuario']==1) { ?>
-                                    Administrador
-                                 <?php } else{echo "Usuario";}?></p>
-                      <p><i class="mdi-action-perm-phone-msg"></i> +1 (612) 222 8989</p>
-                      <p><i class="mdi-communication-email"></i> <?php echo $row['correo']?></p>
-                      <p><i class="mdi-social-cake"></i> <?php echo $row['fecha']?>
-                        </p>
-                          <p>numero de aportaciones<h5><?php 
-
- $mysqli = new mysqli("localhost","root", "", "hongo");
-$query = $mysqli->prepare("SELECT * FROM insumo,proveedor,insumo_proveedor WHERE id='$row[id]'");
-$query->execute();
-$query->store_result();
-
-$resultados = $query->num_rows;
-
-echo $resultados;
-
-
-                          ?>
-                          </h5>  </p>
-                    </div>
-                  </div>
-                </div>
-    </div>
-            </div>
                     <tr>
                        <td> 
-            <p><a class="waves-effect waves-light btn modal-trigger  light-blue" data-target="modal<?php echo $row['id'];?>"> <?php echo $row['id'];?></a>
+            <p><a class="waves-effect waves-light " > <?php echo $row['id'];?></a>
        </p>
                        </td>
                        <td>
-                         <?php echo $row['usuario'];?>
+                         <?php echo $row['nombre'];?>
+                       </td>
+                       <td>
+                         <?php echo $row['medida'];?>
+                       </td>
+                       <td>
+                         <?php echo $row['color'];?>
+                       </td>
+                       <td>
+                         <?php echo $row['unidad'];?>
                        </td>
                             
 
                        <td>
                          <a href="modificar.php?id=<?php echo $row['id'];?>">Modificar</a>
                        </td>
+                       
         <!-- este es la session -->
                           
                          <td>
@@ -305,13 +270,13 @@ echo $resultados;
            <td>
                                       
                                         <?php if($row['status']=="A") {?>
-                                            <a href="hongo-switch.php?id=<?php echo $row['id'];?>" target="_self">
+                                            <a href="insumo-switch.php?id=<?php echo $row['id_insumo'];?>" target="_self">
                                                 <button type="button" class="btn btn-large waves-effect waves-light light-green darken-4">
                                                 Activo
                                                 </button> 
                                             </a>
                                         <?php } else if($row['status'] == "I"){?>
-                                            <a href="hongo-switch.php?id=<?php echo $row['id'];?>" target="_self">
+                                            <a href="insumo-switch.php?id=<?php echo $row['id_insumo'];?>" target="_self">
                                             <button type="button" class="btn btn-large waves-effect waves-light red darken-4">
                                                 Inactivo
                                             </button> 
