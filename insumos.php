@@ -26,12 +26,6 @@ $resultados = $query->num_rows;
 <!DOCTYPE html>
 <html lang="en">
 
-<!--================================================================================
-	Item Name: Materialize - Material Design Admin Template
-	Version: 1.0
-	Author: GeeksLabs
-	Author URL: http://www.themeforest.net/user/geekslabs
-================================================================================ -->
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
