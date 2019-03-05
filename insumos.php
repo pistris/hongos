@@ -14,6 +14,11 @@
      $query="SELECT * FROM insumo";
   
    $resultado=$mysqli->query($query);
+   
+//    $query="SELECT i.id_insumo,i.nombre,i.descripcion,i.medida,i.color,i.familia,i.unidad,i.status,d.nombre_prov FROM insumo AS i INNER JOIN insumo_proveedor AS p ON i.id_insumo = p.id_insumos RIGHT JOIN proveedor AS d
+//    ON d.id_proveedor = p.id_proveedor";
+
+//  $resultado=$mysqli->query($query);
 
    $mysqli = new mysqli("localhost","root", "", "hongo");
 $query = $mysqli->prepare("SELECT * FROM hongos WHERE ID='$idUsuario'");
@@ -240,7 +245,7 @@ $resultados = $query->num_rows;
 
                     <tr>
                        <td> 
-            <p><a class="waves-effect waves-light " > <?php echo $row['id_insumo'];?></a>
+            <p> <?php echo $row['id_insumo'];?>
        </p>
                        </td>
                        <td>
