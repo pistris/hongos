@@ -98,7 +98,7 @@ $resultados = $query->num_rows;
                             </div>
                             <div class="col col s8 m8 l8">
                                 <ul id="profile-dropdown" class="dropdown-content">
-                                     <li><a class="modal-trigger" data-target="modal<?php echo $row['id'];?>">
+                                     <li>
                                       <i class="mdi-action-face-unlock"></i> Perfil</a>
                                     </li>
                                     <li><a href="editarperfil.php"><i class="mdi-action-settings"></i> Settings</a>
