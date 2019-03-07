@@ -24,6 +24,9 @@ include('header.php')
 
 ?>
 
+<section id="content">
+
+
  
      <!--Card Reveal-->
       

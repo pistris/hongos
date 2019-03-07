@@ -174,7 +174,9 @@
          <!-- ================================================
          Scripts
          ================================================ -->
-         
+ 
+ 
+  
          <!-- jQuery Library -->
          <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>    
          <!--materialize js-->
@@ -193,6 +195,14 @@
          <!-- sparkline -->
          <script type="text/javascript" src="js/plugins/sparkline/jquery.sparkline.min.js"></script>
          <script type="text/javascript" src="js/plugins/sparkline/sparkline-script.js"></script>
+         <!--prism-->
+         <script type="text/javascript" src="js/prism.js"></script>
+        
+         <!-- data-tables -->
+         <script type="text/javascript" src="js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
+         <script type="text/javascript" src="js/plugins/data-tables/data-tables-script.js"></script>
+
+ 
          
          <!--jvectormap-->
          <script type="text/javascript" src="js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
